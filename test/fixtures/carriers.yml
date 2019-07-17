@@ -1,3 +1,6 @@
 big_city_mutual:
   name: Big City Mutual Insurance
   industries: underwater_welding
+new_york_city_mutual:
+  name: New York City Mutual Insurance
+  industries: professional_beer_taste_testing

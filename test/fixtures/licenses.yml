@@ -4,3 +4,12 @@ james_in_oh:
 james_in_ky:
   agent: james
   state: 'KY'
+tony_in_mi:
+  agent: tony
+  state: 'MI'
+bruce_in_al:
+  agent: bruce
+  state: 'AL'
+bruce_in_mi:
+  agent: bruce
+  state: 'MI'

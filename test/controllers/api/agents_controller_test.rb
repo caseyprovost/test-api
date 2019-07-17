@@ -5,7 +5,37 @@ class Api::AgentsControllerTest < ActionDispatch::IntegrationTest
     james = Agent.find_by_name('James Willhelm')
     get api_agent_url(james)
 
-    assert_equal response.body, james.to_json
+    assert_equal james.to_json, response.body
+    assert_response :success
+  end
+
+  test "should search agents by state" do
+    james = Agent.find_by_name('James Willhelm')
+    get api_agents_url(state: 'OH')
+
+    agents = JSON.parse(response.body)
+    assert_equal 1, agents.count
+    assert_equal james.id, agents.first['id']
+    assert_response :success
+  end
+
+  test "should search agents by industry" do
+    bruce = Agent.find_by_name('Bruce Banner')
+    get api_agents_url(industry: 'Professional Beer Taste-Tester')
+
+    agents = JSON.parse(response.body)
+    assert_equal 1, agents.count
+    assert_equal bruce.id, agents.first['id']
+    assert_response :success
+  end
+
+  test "should search agents by state AND industry" do
+    bruce = Agent.find_by_name('Bruce Banner')
+    get api_agents_url(industry: 'Professional Beer Taste-Tester', state: 'MI')
+
+    agents = JSON.parse(response.body)
+    assert_equal 1, agents.count
+    assert_equal bruce.id, agents.first['id']
     assert_response :success
   end
 end
