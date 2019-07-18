@@ -4,15 +4,15 @@ class Agent < ApplicationRecord
 
   validates :phone_number, :name, presence: true
 
-  scope :by_industry, -> (industry_name) {
-    joins(carriers: [:industries]).where(industries: { name: industry_name})
+  scope :by_industry, ->(industry_name) {
+    joins(carriers: [:industries]).where(industries: {name: industry_name})
   }
 
-  scope :licensed_in_state, -> (state) {
-    joins(:licenses).where(licenses: { state: state})
+  scope :licensed_in_state, ->(state) {
+    joins(:licenses).where(licenses: {state: state})
   }
 
-  scope :by_phone_number, -> (phone_number) {
+  scope :by_phone_number, ->(phone_number) {
     # searches by removing characters (,),.,- and matching on result
     # a better method would be to add a new column called #normalized_phone_number
     # and using an after_save hook to populate that value. This would allow us to santize

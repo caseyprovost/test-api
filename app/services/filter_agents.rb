@@ -26,10 +26,10 @@ class FilterAgents
   private
 
   def phone_number
-    @phone_number ||= sanitize_phone_number(criteria[:phone_number] || '')
+    @phone_number ||= sanitize_phone_number(criteria[:phone_number] || "")
   end
 
   def sanitize_phone_number(phone_number)
-    phone_number.strip.tr('^0-9', '')
+    phone_number.strip.tr("^0-9", "")
   end
 end
