@@ -12,18 +12,10 @@ class Api::AgentsController < ApplicationController
   private
 
   def filter_agents(agents)
-    if search_params[:state].present?
-      agents = agents.joins(:licenses).where(licenses: { state: search_params[:state] })
-    end
-
-    if search_params[:industry].present?
-      agents = agents.joins(carriers: [:industries]).where(industries: { name: search_params[:industry] })
-    end
-
-    agents
+    ::FilterAgents.new(scope: agents, criteria: search_params).filter
   end
 
   def search_params
-    @search_params ||= params.permit(:state, :industry)
+    @search_params ||= params.permit(:state, :industry, :phone_number)
   end
 end
