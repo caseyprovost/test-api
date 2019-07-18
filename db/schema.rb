@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2018_12_05_170804) do
+ActiveRecord::Schema.define(version: 2019_07_18_150038) do
 
   create_table "agents", force: :cascade do |t|
     t.string "name"
@@ -51,6 +51,19 @@ ActiveRecord::Schema.define(version: 2018_12_05_170804) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["agent_id"], name: "index_licenses_on_agent_id"
+  end
+
+  create_table "policies", force: :cascade do |t|
+    t.integer "agent_id", null: false
+    t.integer "carrier_id", null: false
+    t.integer "industry_id", null: false
+    t.decimal "premium_amount", precision: 18, scale: 6, null: false
+    t.string "policy_holder", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["agent_id"], name: "index_policies_on_agent_id"
+    t.index ["carrier_id"], name: "index_policies_on_carrier_id"
+    t.index ["industry_id"], name: "index_policies_on_industry_id"
   end
 
 end
